@@ -1,21 +1,34 @@
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
-import fs from 'fs'
+import ava from 'ava'
 import net from 'net'
-import { Sandbox } from '../lib/index.js'
-
-const __dirname = join(dirname(fileURLToPath(import.meta.url)))
+import { isBlocked } from './_util/index.js'
 
 // create a socket for attempted connections
 const sock = net.createServer(conn => conn.end())
 sock.listen(5000)
 sock.unref()
 
-;(async function () {
-  for (const programName of fs.readdirSync(join(__dirname, 'programs'))) {
-    const sbx = new Sandbox(join(__dirname, 'programs', programName), {pipeStdout: false, pipeStderr: false})
-    sbx.exec()
-    await sbx.whenFinished
-    console.log(programName, sbx.exitCode === 0 ? 'ALLOWED' : 'DENIED')
-  }
-})()
+function allow (program) {
+  ava(`${program} allowed`, isBlocked, program, false)
+}
+
+function deny (program) {
+  ava(`${program} denied`, isBlocked, program, true)
+}
+
+deny('dns.js')
+deny('exec-echo.js')
+deny('exec-node.js')
+deny('net-bind-socket-to-file.js')
+deny('net-bind-socket-to-port.js')
+deny('net-connect-external.js')
+deny('net-connect-localhost.js')
+allow('noop.js')
+deny('read-cwd-files.js')
+if (process.platform === 'darwin') {
+  allow('readdir-cwd.js')
+} else {
+  deny('readdir-cwd.js')
+}
+deny('readdir-home.js')
+deny('readdir-root.js')
+allow('stdout.js')

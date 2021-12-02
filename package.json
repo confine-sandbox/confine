@@ -1,13 +1,21 @@
 {
-  "name": "sandbox",
+  "name": "@pfrazee/isolated-sandbox",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava -s test/*.js",
+    "docker-build": "docker build -t sandbox-test .",
+    "docker-test": "docker run sandbox-test sh -c \"npm test\""
+  },
+  "optionalDependencies": {
+    "node-seccomp": "pfrazee/node-seccomp#087140c1a31581e6a9b861bafe2788f581a9c8fb"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^3.15.0"
+  }
 }
