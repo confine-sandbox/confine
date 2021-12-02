@@ -7,10 +7,10 @@
   "scripts": {
     "test": "ava -s test/*.js",
     "docker-build": "docker build -t sandbox-test .",
-    "docker-test": "docker run sandbox-test sh -c \"npm test\""
+    "docker-test": "npm run docker-build && docker run sandbox-test sh -c \"./node_modules/.bin/ava -s test/*.js\""
   },
   "dependencies": {
-    "module-sandbox": "git+ssh://git@github.com:andrewosh/module-sandbox.git#main"
+    "module-sandbox": "git+ssh://git@github.com:pfrazee/module-sandbox.git#main"
   },
   "optionalDependencies": {
     "node-seccomp": "pfrazee/node-seccomp#087140c1a31581e6a9b861bafe2788f581a9c8fb"

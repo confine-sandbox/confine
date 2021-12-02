@@ -1,1 +1,1 @@
-console.log('stdout')
+console.log('Hello from this very secure script')

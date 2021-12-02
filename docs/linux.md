@@ -24,6 +24,7 @@ The seccomp uses an allowlist (default deny) with the following allowed syscalls
 - `mprotect`
 - `munmap`
 - `openat`
+- `read`
 - `rt_sigaction`
 - `rt_sigpending`
 - `rt_sigprocmask`
@@ -32,5 +33,6 @@ The seccomp uses an allowlist (default deny) with the following allowed syscalls
 - `rt_sigsuspend`
 - `rt_sigtimedwait`
 - `rt_tgsigqueueinfo`
+- `sendmsg`
 - `write`
 - `writev`
