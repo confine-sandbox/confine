@@ -1,18 +1,20 @@
 import ava from 'ava'
 import net from 'net'
-import { isBlockedNoSandbox } from './_util/index.js'
+import { genIsBlocked } from './_util/index.js'
 
 // create a socket for attempted connections
 const sock = net.createServer(conn => conn.end())
 sock.listen(5000)
 sock.unref()
 
+const isBlocked = genIsBlocked({noSandbox: true, runtime: 'eval'})
+
 function allow (program) {
-  ava(`${program} allowed`, isBlockedNoSandbox, program, false)
+  ava(`${program} allowed`, isBlocked, program, false)
 }
 
 function deny (program) {
-  ava(`${program} denied`, isBlockedNoSandbox, program, true)
+  ava(`${program} denied`, isBlocked, program, true)
 }
 
 allow('dns.js')
