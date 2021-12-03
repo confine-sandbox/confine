@@ -21,6 +21,7 @@
   "devDependencies": {
     "ava": "^3.15.0",
     "jseval-confine-runtime": "^0.0.2",
-    "jsisolate-confine-runtime": "^0.0.1"
+    "jsisolate-confine-runtime": "^0.0.1",
+    "simplewasm-confine-runtime": "^0.0.1"
   }
 }
