@@ -1,5 +1,5 @@
 {
-  "name": "@pfrazee/isolated-sandbox",
+  "name": "@pfrazee/confine",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
@@ -19,6 +19,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^3.15.0"
+    "ava": "^3.15.0",
+    "jseval-confine-runtime": "^0.0.2",
+    "jsisolate-confine-runtime": "^0.0.1"
   }
 }

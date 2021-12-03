@@ -7,7 +7,7 @@ const sock = net.createServer(conn => conn.end())
 sock.listen(5000)
 sock.unref()
 
-const isBlocked = genIsBlocked({runtime: 'v8-isolate'})
+const isBlocked = genIsBlocked({runtime: 'jsisolate-confine-runtime'})
 
 function allow (program) {
   ava(`${program} allowed`, isBlocked, program, false)

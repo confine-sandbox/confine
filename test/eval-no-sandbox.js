@@ -7,7 +7,7 @@ const sock = net.createServer(conn => conn.end())
 sock.listen(5000)
 sock.unref()
 
-const isBlocked = genIsBlocked({noSandbox: true, runtime: 'eval'})
+const isBlocked = genIsBlocked({noSandbox: true, runtime: 'jseval-confine-runtime'})
 
 function allow (program) {
   ava(`${program} allowed`, isBlocked, program, false)

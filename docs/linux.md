@@ -21,6 +21,7 @@ The seccomp uses an allowlist (default deny) with the following allowed syscalls
 - `getsockopt`
 - `ioctl`
 - `madvise`
+- `mmap`
 - `mprotect`
 - `munmap`
 - `openat`

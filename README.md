@@ -1,8 +1,14 @@
-# Isolated Sandbox
+# Confine: a secure sandboxing framework
 
-*work in progress*
+*Work in progress*
 
-A JS runtime which uses V8 isolates ([isolated-vm](https://github.com/laverdet/isolated-vm)) and OS process isolation (supported: [macos](./docs/macos.md), [linux](./docs/linux.md)) to securely execute untrusted code.
+A NodeJS framework for creating sandboxed runtimes for untrusted code. Uses OS process isolation (supported: [macos](./docs/macos.md), [linux](./docs/linux.md)) along with a pluggable runtime.
+
+All runtimes are a subclass of [abstract-confine-runtime](https://npm.im/abstract-confine-runtime). Current runtimes include:
+
+- [js-eval-confine-runtime](https://npm.im/js-eval-confine-runtime) Runs javascript with no additional sandboxing.
+- [js-isolate-confine-runtime](https://npm.im/js-isolate-confine-runtime) Runs javascript in an isolate using [isolated-vm](https://github.com/laverdet/isolated-vm).
+- [simple-wasm-confine-runtime](https://npm.im/simple-wasm-confine-runtime) Runs wasm in an isolate.
 
 ## Process isolation
 
