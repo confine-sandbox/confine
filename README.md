@@ -36,8 +36,13 @@ await sbx.whenFinished
 
 Still todo:
 
-- [ ] A messaging bridge between the runtime process and the host environment
-- [ ] A mechanism for the host environment to import and export functions
+- [ ] Update the wasm runtimes to use the messaging layer
+- [ ] Finalize the messaging protocol
+- [ ] Finalize the runtime APIs generally
+  - [ ] Messaging APIs
+  - [ ] Expected globals (process? Buffer?)
+  - [ ] Expected requires (fs? path?)
+  - [ ] Export API (cjs? esm? what functions are expected?)
 
 ## Process isolation
 
