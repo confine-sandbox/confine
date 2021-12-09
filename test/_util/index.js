@@ -1,18 +1,36 @@
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
-import { Sandbox } from '../../lib/index.js'
+const { join } = require('path')
+const fs = require('fs').promises
+const { Sandbox } = require('../../lib/index.js')
+const { unpack } = require('msgpackr')
 
-const __dirname = join(dirname(fileURLToPath(import.meta.url)))
-
-export function genIsBlocked (opts) {
+exports.genIsBlocked = (opts) => {
   return async function (t, input, expected) {
-    const sbx = new Sandbox(join(__dirname, '..', 'programs', input), opts)
-    sbx.exec()
-    await sbx.whenFinished
+    const sbx = new Sandbox(opts)
+    sbx.on('container-runtime-error', ({cid, error}) => {
+      console.error('Script error:', error)
+    })
+    await sbx.init()
+    try {
+      const {cid} = await sbx.execContainer({sourcePath: join(__dirname, '..', 'programs', input)})
+      await sbx.ipc.request(cid, Buffer.from([0])).catch(e => e)
+    } catch (e) {
+      if (Buffer.isBuffer(e)) {
+        throw new Error(unpack(e).message)
+      } else {
+        throw e
+      }
+    }
     if (expected) {
-      t.not(sbx.exitCode, 0)
+      await sbx.whenGuestProcessClosed
+      t.falsy(sbx.isGuestProcessActive)
+      if (process.platform === 'linux') {
+        t.is(sbx.guestExitSignal, 'SIGSYS')
+      } else {
+        t.not(sbx.guestExitCode, 0)
+      }
     } else {
-      t.is(sbx.exitCode, 0)
+      t.truthy(sbx.isGuestProcessActive)
+      await sbx.teardown()
     }
   }
 }

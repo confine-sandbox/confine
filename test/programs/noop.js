@@ -1,1 +1,5 @@
-// do nothing
+module.exports = {
+  onrequest: () => {
+    // do nothing
+  }
+}

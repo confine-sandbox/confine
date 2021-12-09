@@ -1,6 +1,6 @@
-import ava from 'ava'
-import net from 'net'
-import { genIsBlocked } from './_util/index.js'
+const ava = require('ava')
+const net = require('net')
+const { genIsBlocked } = require('./_util/index.js')
 
 // create a socket for attempted connections
 const sock = net.createServer(conn => conn.end())

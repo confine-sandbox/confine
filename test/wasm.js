@@ -1,5 +1,5 @@
-import ava from 'ava'
-import { genIsBlocked } from './_util/index.js'
+const ava = require('ava')
+const { genIsBlocked } = require('./_util/index.js')
 
 const isBlocked = genIsBlocked({runtime: 'simplewasm-confine-runtime'})
 

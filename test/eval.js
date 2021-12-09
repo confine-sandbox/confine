@@ -1,13 +1,13 @@
-import ava from 'ava'
-import net from 'net'
-import { genIsBlocked } from './_util/index.js'
+const ava = require('ava')
+const net = require('net')
+const { genIsBlocked } = require('./_util/index.js')
 
 // create a socket for attempted connections
 const sock = net.createServer(conn => conn.end())
 sock.listen(5000)
 sock.unref()
 
-const isBlocked = genIsBlocked({runtime: 'jseval-confine-runtime'})
+const isBlocked = genIsBlocked({runtime: 'jseval-confine-runtime', pipeStdout: true, pipeStderr: true})
 
 function allow (program) {
   ava(`${program} allowed`, isBlocked, program, false)

@@ -8,7 +8,7 @@ All runtimes are a subclass of [abstract-confine-runtime](https://npm.im/abstrac
 
 - [jseval-confine-runtime](https://npm.im/jseval-confine-runtime) Runs javascript with no additional sandboxing.
 - [jsisolate-confine-runtime](https://npm.im/jsisolate-confine-runtime) Runs javascript in an isolate using [isolated-vm](https://github.com/laverdet/isolated-vm).
-- [wasi-confine-runtime](https://npm.im/simplewasm-confine-runtime) Runs WASI-targetted WASM. 
+- [wasi-confine-runtime](https://npm.im/wasi-confine-runtime) Runs WASI-targetted WASM. 
 - [simplewasm-confine-runtime](https://npm.im/simplewasm-confine-runtime) A simple WASM runtime.
 
 ```

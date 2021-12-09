@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
-  "type": "module",
   "scripts": {
     "test": "ava -s test/*.js",
     "docker-build": "docker build -t sandbox-test .",
-    "docker-test": "npm run docker-build && docker run sandbox-test sh -c \"./node_modules/.bin/ava -s test/*.js\""
+    "docker-test": "npm run docker-build && docker run sandbox-test sh -c \"./node_modules/.bin/ava test/eval.js\""
   },
   "dependencies": {
-    "module-sandbox": "git+ssh://git@github.com:pfrazee/module-sandbox.git#main"
+    "compact-encoding": "^2.5.1",
+    "frame-stream": "^3.0.0",
+    "get-port": "^6.0.0",
+    "msgpackr": "^1.5.1"
   },
   "optionalDependencies": {
     "node-seccomp": "pfrazee/node-seccomp#087140c1a31581e6a9b861bafe2788f581a9c8fb"
@@ -20,8 +22,8 @@
   "license": "ISC",
   "devDependencies": {
     "ava": "^3.15.0",
-    "jseval-confine-runtime": "^0.0.2",
-    "jsisolate-confine-runtime": "^0.0.1",
+    "jseval-confine-runtime": "^0.2.0",
+    "jsisolate-confine-runtime": "^0.2.0",
     "simplewasm-confine-runtime": "^0.0.1"
   }
 }
