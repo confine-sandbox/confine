@@ -12,13 +12,15 @@ exports.genIsBlocked = (opts) => {
     await sbx.init()
     const runtimeOpts = opts.runtimeOpts || {}
     runtimeOpts.sourcePath = join(__dirname, '..', 'programs', input)
-    const {cid} = await sbx.execContainer(runtimeOpts)
-    await sbx.handleAPICall(cid, 'runTest', []).catch(e => e)
+    try {
+      const {cid} = await sbx.execContainer(runtimeOpts)
+      await sbx.handleAPICall(cid, 'runTest', []).catch(e => e)
+    } catch (e) {}
     if (expected) {
       await sbx.whenGuestProcessClosed
       t.falsy(sbx.isGuestProcessActive)
       if (process.platform === 'linux') {
-        t.is(sbx.guestExitSignal, 'SIGSYS')
+        t.is(sbx.guestExitSignal, opts.noSandbox ? 'SIGTERM' : 'SIGSYS')
       } else {
         t.not(sbx.guestExitCode, 0)
       }
