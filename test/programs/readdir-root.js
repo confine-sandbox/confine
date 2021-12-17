@@ -1,5 +1,5 @@
 module.exports = {
-  onrequest: () => {
+  runTest: () => {
     try {
       const fs = require('fs')
       fs.readdirSync('/')

@@ -1,5 +1,5 @@
 module.exports = {
-  onrequest: () => {
+  runTest: () => {
     return new Promise(r => {
       try {
         const net = require('net')

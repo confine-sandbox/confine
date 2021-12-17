@@ -1,5 +1,5 @@
 module.exports = {
-  onrequest: () => {
+  runTest: () => {
     return new Promise(r => {
       try {
         require('dns').lookup('example.com', (err, res) => {

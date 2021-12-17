@@ -1,5 +1,5 @@
 module.exports = {
-  onrequest: () => {
+  runTest: () => {
     // do nothing
   }
 }

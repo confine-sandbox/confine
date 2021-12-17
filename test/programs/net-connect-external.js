@@ -1,5 +1,5 @@
 module.exports = {
-  onrequest: () => {
+  runTest: () => {
     return new Promise(r => {
       try {
         const sock = require('net').connect(80, 'example.com')

@@ -11,4 +11,5 @@ function deny (program) {
   ava(`${program} denied`, isBlocked, program, true)
 }
 
-allow('fizzbuzz.wasm')
+// TODO
+// allow('fizzbuzz.wasm')

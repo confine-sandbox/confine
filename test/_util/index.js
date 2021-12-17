@@ -10,16 +10,10 @@ exports.genIsBlocked = (opts) => {
       console.error('Script error:', error)
     })
     await sbx.init()
-    try {
-      const {cid} = await sbx.execContainer({sourcePath: join(__dirname, '..', 'programs', input)})
-      await sbx.ipc.request(cid, Buffer.from([0])).catch(e => e)
-    } catch (e) {
-      if (Buffer.isBuffer(e)) {
-        throw new Error(unpack(e).message)
-      } else {
-        throw e
-      }
-    }
+    const runtimeOpts = opts.runtimeOpts || {}
+    runtimeOpts.sourcePath = join(__dirname, '..', 'programs', input)
+    const {cid} = await sbx.execContainer(runtimeOpts)
+    await sbx.handleAPICall(cid, 'runTest', []).catch(e => e)
     if (expected) {
       await sbx.whenGuestProcessClosed
       t.falsy(sbx.isGuestProcessActive)

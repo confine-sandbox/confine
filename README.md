@@ -6,10 +6,8 @@ A NodeJS framework for creating sandboxed runtimes for untrusted code. Uses OS p
 
 All runtimes are a subclass of [abstract-confine-runtime](https://npm.im/abstract-confine-runtime). Current runtimes include:
 
-- [jseval-confine-runtime](https://npm.im/jseval-confine-runtime) Runs javascript with no additional sandboxing.
-- [jsisolate-confine-runtime](https://npm.im/jsisolate-confine-runtime) Runs javascript in an isolate using [isolated-vm](https://github.com/laverdet/isolated-vm).
-- [wasi-confine-runtime](https://npm.im/wasi-confine-runtime) Runs WASI-targetted WASM. 
-- [simplewasm-confine-runtime](https://npm.im/simplewasm-confine-runtime) A simple WASM runtime.
+- [jseval-confine-runtime](https://github.com/confine-sandbox/jseval-confine-runtime) Runs javascript with no additional sandboxing.
+- [jsisolate-confine-runtime](https://github.com/confine-sandbox/jsisolate-confine-runtime) Runs javascript in an isolate using [isolated-vm](https://github.com/laverdet/isolated-vm).
 
 ```
 npm i confine-sandbox
@@ -26,23 +24,14 @@ const sbx = new Sandbox(scriptPath, {
   logSpawn: false, // log the spawn() call parameters?
   noSandbox: false, // disable the process-level isolation?
   pipeStdout: false, // pipe the spawned process's stdout to the parent stdout?
-  pipeStderr: false // pipe the spawned process's stderr to the parent stderr?
+  pipeStderr: false, // pipe the spawned process's stderr to the parent stderr?
+  globals: {
+    // ... methods that should be injected into the global context
+  }
 })
 sbx.exec()
 await sbx.whenFinished
 ```
-
-## Work in progress
-
-Still todo:
-
-- [ ] Update the wasm runtimes to use the messaging layer
-- [ ] Finalize the messaging protocol
-- [ ] Finalize the runtime APIs generally
-  - [ ] Messaging APIs
-  - [ ] Expected globals (process? Buffer?)
-  - [ ] Expected requires (fs? path?)
-  - [ ] Export API (cjs? esm? what functions are expected?)
 
 ## Process isolation
 

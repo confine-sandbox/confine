@@ -1,5 +1,5 @@
 module.exports = {
-  onrequest: () => {
+  runTest: () => {
     try {
       const {join} = require('path')
       const fs = require('fs')

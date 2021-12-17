@@ -12,6 +12,8 @@
     "compact-encoding": "^2.5.1",
     "frame-stream": "^3.0.0",
     "get-port": "^6.0.0",
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2",
     "msgpackr": "^1.5.1"
   },
   "optionalDependencies": {
@@ -22,8 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "ava": "^3.15.0",
-    "jseval-confine-runtime": "^0.2.0",
-    "jsisolate-confine-runtime": "^0.2.0",
-    "simplewasm-confine-runtime": "^0.0.1"
+    "jseval-confine-runtime": "^0.3.0",
+    "jsisolate-confine-runtime": "^0.3.0"
   }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  onrequest: () => {
+  runTest: () => {
     return new Promise(r => {
       try {
         const {spawn} = require('child_process')
