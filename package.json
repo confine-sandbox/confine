@@ -1,6 +1,6 @@
 {
-  "name": "@pfrazee/confine",
-  "version": "1.0.0",
+  "name": "confine-sandbox",
+  "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
