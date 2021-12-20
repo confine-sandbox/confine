@@ -18,7 +18,7 @@ Usage example:
 ```js
 import { Sandbox } from 'confine-sandbox'
 
-const sbx = new Sandbox(scriptPath, {
+const sbx = new Sandbox({
   runtime: 'jseval-confine-runtime', // the name of the runtime module; must conform to abstract-confine-runtime
   strace: false, // print an strace of the execution?
   logSpawn: false, // log the spawn() call parameters?
@@ -29,8 +29,12 @@ const sbx = new Sandbox(scriptPath, {
     // ... methods that should be injected into the global context
   }
 })
-sbx.exec()
-await sbx.whenFinished
+const {cid} = await sbx.execContainer({
+  source: 'module.exports.addOne = (num) => num + 1',
+  sourcePath: '/path/to/source/file.js',
+  // ...any other opts specific to the runtime
+})
+const res = await sbx.handleAPICall(cid, 'addOne', [5]) // => 6
 ```
 
 ## Process isolation
@@ -40,3 +44,56 @@ Allowed access to the host environment will be tuned as the runtime environment 
 Notes:
 
 - On MacOS, it's not currently possible to stop a readdir() on the cwd. No subsequent files can be read.
+
+## API
+
+```typescript
+import { EventEmitter } from 'events'
+import { Server } from 'net'
+import { ChildProcess } from 'child_process'
+
+export declare interface SandboxConstructorOpts {
+  runtime?: string
+  globals?: any
+  strace?: boolean
+  logSpawn?: boolean
+  noSandbox?: boolean
+  pipeStdout?: boolean
+  pipeStderr?: boolean
+}
+
+export declare interface SandboxExecContainerOpts {
+  source?: string
+  sourcePath?: string
+}
+
+export declare interface ConfineContainer {
+  cid: number
+  opts?: any
+}
+
+export type ConfineIPC = any
+
+export declare class Sandbox extends EventEmitter {
+  opts: SandboxConstructorOpts
+  guestProcess?: ChildProcess
+  ipcServer?: Server
+  ipcServerPort?: number
+  ipcClientPort?: number
+  ipc?: ConfineIPC
+  whenGuestProcessClosed: Promise<number>
+  globalsMap: Map<string, Function>
+
+  constructor (opts: SandboxConstructorOpts)
+  get guestExitCode (): number
+  get guestExitSignal (): string
+  get isGuestProcessActive (): boolean
+  get runtimePath (): string
+  init (): Promise<void>
+  teardown (): Promise<number>
+  listContainers (): Promise<ConfineContainer[]>
+  execContainer (opts: SandboxExecContainerOpts|any): Promise<ConfineContainer>
+  killContainer (container: ConfineContainer): Promise<void>
+  handleAPICall (cid: number, methodName: string, params: any[]): Promise<any>
+}
+```
