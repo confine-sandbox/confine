@@ -1,7 +1,7 @@
 {
   "name": "confine-sandbox",
   "version": "0.1.0",
-  "description": "",
+  "description": "A NodeJS framework for creating sandboxed runtimes for untrusted code.",
   "main": "lib/index.js",
   "scripts": {
     "test": "ava -s test/*.js",
@@ -20,11 +20,24 @@
     "node-seccomp": "pfrazee/node-seccomp#087140c1a31581e6a9b861bafe2788f581a9c8fb"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Paul Frazee <pfrazee@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "ava": "^3.15.0",
     "jseval-confine-runtime": "^0.3.0",
     "jsisolate-confine-runtime": "^0.3.0"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/confine-sandbox/confine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/confine-sandbox/confine/issues"
+  },
+  "homepage": "https://github.com/confine-sandbox/confine#readme"
 }
