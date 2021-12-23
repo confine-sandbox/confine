@@ -34,6 +34,7 @@ const {cid} = await sbx.execContainer({
   sourcePath: '/path/to/source/file.js',
   // ...any other opts specific to the runtime
 })
+await sbx.configContainer({cid, opts: {/*...*/}})
 const res = await sbx.handleAPICall(cid, 'addOne', [5]) // => 6
 ```
 

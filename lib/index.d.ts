@@ -43,6 +43,7 @@ export declare class Sandbox extends EventEmitter {
   teardown (): Promise<number>
   listContainers (): Promise<ConfineContainer[]>
   execContainer (opts: SandboxExecContainerOpts|any): Promise<ConfineContainer>
+  configContainer (container: ConfineContainer)
   killContainer (container: ConfineContainer): Promise<void>
   handleAPICall (cid: number, methodName: string, params: any[]): Promise<any>
 }
