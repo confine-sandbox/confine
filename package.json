@@ -1,6 +1,6 @@
 {
   "name": "confine-sandbox",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A NodeJS framework for creating sandboxed runtimes for untrusted code.",
   "main": "lib/index.js",
   "scripts": {
