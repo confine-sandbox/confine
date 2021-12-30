@@ -25,7 +25,7 @@
   "devDependencies": {
     "ava": "^3.15.0",
     "jseval-confine-runtime": "^0.3.0",
-    "jsisolate-confine-runtime": "^0.3.0"
+    "jsisolate-confine-runtime": "^0.3.1"
   },
   "directories": {
     "doc": "docs",
