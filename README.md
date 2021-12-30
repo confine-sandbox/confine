@@ -20,6 +20,7 @@ import { Sandbox } from 'confine-sandbox'
 
 const sbx = new Sandbox({
   runtime: 'jseval-confine-runtime', // the name of the runtime module; must conform to abstract-confine-runtime
+  nodeModulesPath: path.join(__dirname, 'node_modules'), // the path to your project's node_modules
   strace: false, // print an strace of the execution?
   logSpawn: false, // log the spawn() call parameters?
   noSandbox: false, // disable the process-level isolation?

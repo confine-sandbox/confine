@@ -5,6 +5,7 @@ import { ChildProcess } from 'child_process'
 export declare interface SandboxConstructorOpts {
   runtime?: string
   globals?: any
+  nodeModulesPath?: string
   strace?: boolean
   logSpawn?: boolean
   noSandbox?: boolean
