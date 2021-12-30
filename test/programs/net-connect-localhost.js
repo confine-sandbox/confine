@@ -2,7 +2,7 @@ module.exports = {
   runTest: () => {
     return new Promise(r => {
       try {
-        const sock = require('net').connect(5000)
+        const sock = require('net').connect(17000)
         sock.on('connect', () => {
           console.log('socket connected')
           r()
